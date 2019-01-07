@@ -28,7 +28,7 @@ public class ServerHandler implements Runnable {
 	@Override
 	public void run() {
 		try {
-			while (stop) {
+			while (!this.stop) {
 				selector.select(1000L);
 				Set<SelectionKey> selectionKeys = selector.selectedKeys();
 				Iterator<SelectionKey> it = selectionKeys.iterator();
@@ -50,6 +50,7 @@ public class ServerHandler implements Runnable {
 				}
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			// TODO
 		} finally {
 			if (selector != null) {
